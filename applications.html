@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications — Trap Network</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .tab-btn {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: 1.05rem;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--navy-600);
+    background: var(--navy-700);
+    color: var(--ink-400);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .tab-btn.active {
+    background: var(--amber-500);
+    border-color: var(--amber-500);
+    color: var(--navy-900);
+  }
+  .app-form {
+    background: var(--navy-700);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: none;
+  }
+  .app-form.active { display: block; }
+  .form-row { margin-bottom: 20px; }
+  .form-row label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: var(--ink-100);
+  }
+  .form-row .hint {
+    font-size: 0.78rem;
+    color: var(--ink-400);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    background: var(--navy-800);
+    border: 1px solid var(--navy-600);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    color: var(--ink-100);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+  }
+  .form-row textarea { resize: vertical; min-height: 90px; }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--amber-500);
+  }
+  .form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .req-note {
+    font-size: 0.85rem;
+    color: var(--danger);
+    margin-top: 4px;
+    display: none;
+  }
+  .form-row.error input,
+  .form-row.error select,
+  .form-row.error textarea { border-color: var(--danger); }
+  .form-row.error .req-note { display: block; }
+
+  .requirements {
+    background: var(--navy-800);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--ink-400);
+  }
+  .requirements strong { color: var(--ink-100); }
+
+  .confirmation {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .confirmation.active { display: block; }
+  .confirmation .check-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 16px;
+    background: var(--leaf-500);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .confirmation h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    margin: 0 0 8px;
+  }
+  .confirmation p { color: var(--ink-400); max-width: 440px; margin: 0 auto 20px; }
+
+  @media (max-width: 640px) {
+    .form-grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav-group left">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="announcements.html">ANNOUNCEMENTS</a>
+      <a class="nav-link active" href="applications.html">APPLICATIONS</a>
+      <a class="nav-link" href="store.html">STORE</a>
+    </nav>
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Trap Network">
+    </a>
+    <nav class="nav-group right">
+      <a class="nav-link" href="staff.html">STAFF</a>
+      <a class="nav-link" href="rules.html">RULES</a>
+      <a class="nav-link" href="index.html#play">PLAY</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <a href="login.html">LOG IN</a>
+    <a href="register.html">REGISTER</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="eyebrow">JOIN THE TEAM</div>
+  <h1>Applications</h1>
+  <p>Pick an application below, fill it out honestly, and our staff team will review it as soon as possible.</p>
+</section>
+
+<div class="page-wrap">
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-target="staff-form">Staff</button>
+    <button class="tab-btn" data-target="builder-form">Builder</button>
+    <button class="tab-btn" data-target="youtuber-form">YouTuber</button>
+  </div>
+
+  <div class="requirements">
+    <strong>Before you apply:</strong> you must be a registered member of the Discord, have no active punishments, and be at least 13 years old. Low-effort applications (one-word answers, copy-paste) will be denied automatically.
+  </div>
+
+  <!-- STAFF APPLICATION -->
+  <form class="app-form active" id="staff-form" data-app-name="Staff">
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label>Minecraft Username</label>
+        <input type="text" name="ign" required>
+        <div class="req-note">Please enter your Minecraft username.</div>
+      </div>
+      <div class="form-row">
+        <label>Discord Username</label>
+        <input type="text" name="discord" placeholder="e.g. zak#0001 or zak" required>
+        <div class="req-note">Please enter your Discord username.</div>
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label>Age</label>
+        <input type="number" name="age" min="13" max="99" required>
+        <div class="req-note">Must be 13 or older.</div>
+      </div>
+      <div class="form-row">
+        <label>Timezone</label>
+        <input type="text" name="timezone" placeholder="e.g. GMT+10" required>
+        <div class="req-note">Please enter your timezone.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Hours you can play/moderate per week</label>
+      <input type="text" name="hours" required>
+      <div class="req-note">Please enter your availability.</div>
+    </div>
+    <div class="form-row">
+      <label>Prior staff/moderation experience</label>
+      <textarea name="experience"></textarea>
+    </div>
+    <div class="form-row">
+      <label>Why should we accept you as staff? <span class="hint">(min. 40 characters)</span></label>
+      <textarea name="why" required></textarea>
+      <div class="req-note">Please write at least 40 characters.</div>
+    </div>
+    <div class="form-row">
+      <label>Describe how you'd handle a player breaking rules in chat</label>
+      <textarea name="scenario" required></textarea>
+      <div class="req-note">Please answer this scenario.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Staff Application</button>
+  </form>
+
+  <!-- BUILDER APPLICATION -->
+  <form class="app-form" id="builder-form" data-app-name="Builder">
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label>Minecraft Username</label>
+        <input type="text" name="ign" required>
+        <div class="req-note">Please enter your Minecraft username.</div>
+      </div>
+      <div class="form-row">
+        <label>Discord Username</label>
+        <input type="text" name="discord" required>
+        <div class="req-note">Please enter your Discord username.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Building style / specialty</label>
+      <input type="text" name="style" placeholder="e.g. medieval, redstone, terraforming" required>
+      <div class="req-note">Please enter your building style.</div>
+    </div>
+    <div class="form-row">
+      <label>Portfolio link <span class="hint">(Imgur, Planet Minecraft, YouTube, etc.)</span></label>
+      <input type="url" name="portfolio" placeholder="https://" required>
+      <div class="req-note">Please provide a link to your work.</div>
+    </div>
+    <div class="form-row">
+      <label>Why do you want to build for Trap Network?</label>
+      <textarea name="why" required></textarea>
+      <div class="req-note">Please answer this question.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Builder Application</button>
+  </form>
+
+  <!-- YOUTUBER APPLICATION -->
+  <form class="app-form" id="youtuber-form" data-app-name="YouTuber">
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label>Minecraft Username</label>
+        <input type="text" name="ign" required>
+        <div class="req-note">Please enter your Minecraft username.</div>
+      </div>
+      <div class="form-row">
+        <label>Discord Username</label>
+        <input type="text" name="discord" required>
+        <div class="req-note">Please enter your Discord username.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Channel link</label>
+      <input type="url" name="channel" placeholder="https://" required>
+      <div class="req-note">Please provide your channel link.</div>
+    </div>
+    <div class="form-row">
+      <label>Subscriber / follower count</label>
+      <input type="text" name="subs" required>
+      <div class="req-note">Please enter your subscriber count.</div>
+    </div>
+    <div class="form-row">
+      <label>Planned content featuring Trap Network</label>
+      <textarea name="content" required></textarea>
+      <div class="req-note">Please answer this question.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit YouTuber Application</button>
+  </form>
+
+  <!-- CONFIRMATION -->
+  <div class="confirmation" id="confirmation">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#0c1220" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg>
+    </div>
+    <h3>Application ready to send</h3>
+    <p>Copy your application below and send it in the <strong>#applications</strong> channel on our Discord, or send it directly via email.</p>
+    <textarea id="appOutput" style="width:100%;min-height:220px;background:var(--navy-800);border:1px solid var(--navy-600);border-radius:8px;color:var(--ink-100);padding:14px;font-family:var(--font-pixel);font-size:0.78rem;"></textarea>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap;">
+      <button class="btn btn-primary" id="copyAppBtn">Copy to Clipboard</button>
+      <button class="btn btn-outline" id="openDiscordFromConfirm">Open Discord</button>
+      <button class="btn btn-outline" id="startOverBtn">Start Another Application</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Trap Network. Not affiliated with Mojang or Microsoft.</span>
+    <span class="footer-links">
+      <a href="rules.html">Rules</a>
+      <a href="applications.html">Applications</a>
+      <a href="staff.html">Staff</a>
+    </span>
+  </div>
+</footer>
+
+<div class="cookie-banner">
+  <p>This site uses cookies to help personalise content, tailor your experience and to keep you logged in if you register. By continuing to use this site, you are consenting to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="accept">&#10003; Accept</button>
+    <button class="learn-more">Learn more...</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+
+  // Tab switching
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const forms = document.querySelectorAll('.app-form');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      forms.forEach(f => f.classList.remove('active'));
+      document.getElementById(btn.dataset.target).classList.add('active');
+      document.getElementById('confirmation').classList.remove('active');
+    });
+  });
+
+  // Validation + fake submit -> builds a text summary
+  forms.forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let valid = true;
+
+      form.querySelectorAll('[required]').forEach(field => {
+        const row = field.closest('.form-row');
+        let ok = field.value.trim().length > 0;
+        if (field.name === 'why' && form.dataset.appName === 'Staff') {
+          ok = field.value.trim().length >= 40;
+        }
+        if (ok) {
+          row.classList.remove('error');
+        } else {
+          row.classList.add('error');
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        showToast('Please fill out all required fields.');
+        return;
+      }
+
+      const data = new FormData(form);
+      let lines = [`Trap Network — ${form.dataset.appName} Application`, '—'.repeat(30)];
+      data.forEach((value, key) => {
+        lines.push(`${key.toUpperCase()}: ${value}`);
+      });
+      document.getElementById('appOutput').value = lines.join('\n');
+
+      forms.forEach(f => f.classList.remove('active'));
+      document.getElementById('confirmation').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  document.getElementById('copyAppBtn').addEventListener('click', () => {
+    const out = document.getElementById('appOutput');
+    out.select();
+    navigator.clipboard.writeText(out.value).then(() => showToast('Application copied to clipboard!'));
+  });
+
+  document.getElementById('openDiscordFromConfirm').addEventListener('click', () => {
+    window.open('https://discord.trapnetwork.net', '_blank', 'noopener');
+  });
+
+  document.getElementById('startOverBtn').addEventListener('click', () => {
+    document.getElementById('confirmation').classList.remove('active');
+    document.querySelector('.tab-btn.active').classList.remove('active');
+    tabButtons[0].classList.add('active');
+    forms.forEach(f => f.classList.remove('active'));
+    forms[0].classList.add('active');
+    forms[0].reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

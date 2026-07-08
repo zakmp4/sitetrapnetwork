@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Trap Network</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav-group left">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="announcements.html">ANNOUNCEMENTS</a>
+      <a class="nav-link" href="applications.html">APPLICATIONS</a>
+      <a class="nav-link" href="store.html">STORE</a>
+    </nav>
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Trap Network">
+    </a>
+    <nav class="nav-group right">
+      <a class="nav-link" href="staff.html">STAFF</a>
+      <a class="nav-link" href="rules.html">RULES</a>
+      <a class="nav-link" href="index.html#play">PLAY</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <a href="login.html">LOG IN</a>
+    <a href="register.html">REGISTER</a>
+  </div>
+</div>
+
+<div class="auth-shell">
+  <div class="auth-card">
+
+    <div class="step-dots">
+      <span class="active" data-dot="1"></span>
+      <span data-dot="2"></span>
+      <span data-dot="3"></span>
+    </div>
+
+    <!-- STEP 1: Sign in -->
+    <div class="auth-step active" id="step1">
+      <h2>Create account</h2>
+      <p class="auth-sub">Join Trap Network in seconds</p>
+
+      <form id="emailForm">
+        <div class="field-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <div class="field-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" placeholder="••••••••" required>
+        </div>
+        <div class="modal-error" id="passError">Passwords don't match.</div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" style="flex:1;">Create Account</button>
+        </div>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+
+    <!-- STEP 2: Minecraft username -->
+    <div class="auth-step" id="step2">
+      <h2>Almost there</h2>
+      <p class="auth-sub">What's your Minecraft username?</p>
+      <form id="mcForm">
+        <div class="field-group">
+          <label for="mcUsername">Minecraft username</label>
+          <input type="text" id="mcUsername" placeholder="e.g. Goldwarrior1002" required>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" style="flex:1;">Continue</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- STEP 3: Link code -->
+    <div class="auth-step" id="step3">
+      <h2>Link your account</h2>
+      <p class="auth-sub">One last step to connect your account in-game</p>
+      <div class="link-code-box">
+        <div style="font-size:0.78rem; color:var(--ink-400); text-transform:uppercase; letter-spacing:0.05em;">Your link code</div>
+        <div class="link-code" id="linkCode">------</div>
+        <button class="btn-secondary" id="copyCodeBtn" style="margin-top:6px; width:auto; padding:8px 16px;">Copy code</button>
+      </div>
+      <div class="auth-instructions">
+        1. Join the server at <code>trapnetwork.net</code><br>
+        2. Type <code>/link <span id="codeInline">------</span></code> in chat<br>
+        3. Your account will link automatically once verified
+      </div>
+      <div class="link-status waiting" id="linkStatus">
+        <span class="status-dot"></span>
+        <span id="linkStatusText">Waiting for you to run the command in-game…</span>
+      </div>
+      <a href="index.html" class="btn-primary" id="linkDoneBtn" style="display:none; text-align:center; text-decoration:none;">You're linked — take me home</a>
+      <button class="create-announce-link" id="skipLinkBtn" style="display:block; margin:14px auto 0;">Skip for now</button>
+    </div>
+
+    <p class="demo-note">
+      Verification calls TrapLink's API directly from this page — see API_BASE_URL / API_KEY at the top of the script below. Until that points to your real, publicly reachable HTTPS endpoint, this will just wait quietly and never confirm (use "Skip for now" during testing).
+    </p>
+  </div>
+</div>
+
+<div class="cookie-banner">
+  <p>This site uses cookies to help personalise content, tailor your experience and to keep you logged in if you register. By continuing to use this site, you are consenting to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="accept">&#10003; Accept</button>
+    <button class="learn-more">Learn more...</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // ===== TrapLink verification config =====
+  // Point this at your real, HTTPS, publicly reachable TrapLink API
+  // (see the plugin README re: reverse proxy). Must match the plugin's
+  // config.yml exactly.
+  const API_BASE_URL = "https://api.trapnetwork.net"; // TODO: replace with your real domain
+  const API_KEY = "REPLACE_WITH_YOUR_API_KEY";          // TODO: must match plugins/TrapLink/config.yml
+  // NOTE: any key placed in this public JS file is visible to anyone who
+  // views source. It's fine for now, but for a hardened setup later,
+  // route this through a small server-side proxy that holds the real key.
+
+  let pollTimer = null;
+
+  function goToStep(n) {
+    document.querySelectorAll('.auth-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    document.querySelectorAll('[data-dot]').forEach(d => {
+      d.classList.toggle('active', parseInt(d.dataset.dot, 10) <= n);
+    });
+  }
+
+  document.getElementById('emailForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const pass = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    if (pass !== confirm) {
+      document.getElementById('passError').classList.add('show');
+      return;
+    }
+    document.getElementById('passError').classList.remove('show');
+    showToast('Demo mode: account created!');
+    goToStep(2);
+  });
+
+  document.getElementById('mcForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+    document.getElementById('linkCode').textContent = code;
+    document.getElementById('codeInline').textContent = code;
+    resetLinkStatus();
+    goToStep(3);
+    startPolling(code);
+  });
+
+  document.getElementById('copyCodeBtn').addEventListener('click', () => {
+    const code = document.getElementById('linkCode').textContent;
+    navigator.clipboard?.writeText(code).then(() => showToast('Code copied!'));
+  });
+
+  document.getElementById('skipLinkBtn').addEventListener('click', () => {
+    stopPolling();
+    window.location.href = 'index.html';
+  });
+
+  function resetLinkStatus() {
+    const status = document.getElementById('linkStatus');
+    status.classList.remove('success');
+    status.classList.add('waiting');
+    document.getElementById('linkStatusText').textContent = 'Waiting for you to run the command in-game…';
+    document.getElementById('linkDoneBtn').style.display = 'none';
+    document.getElementById('skipLinkBtn').style.display = 'block';
+  }
+
+  function startPolling(code) {
+    stopPolling();
+    pollTimer = setInterval(async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/check?code=${encodeURIComponent(code)}`, {
+          headers: { 'X-Api-Key': API_KEY }
+        });
+        const data = await res.json();
+        if (data.found) {
+          stopPolling();
+          showLinked(data.username);
+        }
+      } catch (err) {
+        // API not reachable yet (not deployed, still testing locally, etc).
+        // Keep waiting quietly rather than breaking the page.
+        console.warn('TrapLink check failed (will retry):', err.message);
+      }
+    }, 3000);
+  }
+
+  function stopPolling() {
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = null;
+  }
+
+  function showLinked(username) {
+    const status = document.getElementById('linkStatus');
+    status.classList.remove('waiting');
+    status.classList.add('success');
+    document.getElementById('linkStatusText').textContent = `Linked as ${username}!`;
+    document.getElementById('linkDoneBtn').style.display = 'block';
+    document.getElementById('skipLinkBtn').style.display = 'none';
+    showToast(`Linked as ${username}!`);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff — Trap Network</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .rank-block { margin-bottom: 40px; }
+  .rank-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .rank-heading h2 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  .rank-swatch {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+  }
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .staff-card {
+    background: var(--navy-700);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .staff-card:hover { transform: translateY(-2px); border-color: var(--amber-500); }
+  .staff-avatar {
+    width: 68px; height: 68px;
+    border-radius: 12px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy-900);
+  }
+  .staff-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+  }
+  .staff-role {
+    font-size: 0.8rem;
+    color: var(--ink-400);
+    letter-spacing: 0.04em;
+  }
+  .placeholder-note {
+    background: rgba(242,163,0,0.1);
+    border: 1px dashed var(--amber-500);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    color: var(--amber-300);
+    margin-bottom: 36px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav-group left">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="announcements.html">ANNOUNCEMENTS</a>
+      <a class="nav-link" href="applications.html">APPLICATIONS</a>
+      <a class="nav-link" href="store.html">STORE</a>
+    </nav>
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Trap Network">
+    </a>
+    <nav class="nav-group right">
+      <a class="nav-link active" href="staff.html">STAFF</a>
+      <a class="nav-link" href="rules.html">RULES</a>
+      <a class="nav-link" href="index.html#play">PLAY</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <a href="login.html">LOG IN</a>
+    <a href="register.html">REGISTER</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="eyebrow">THE PEOPLE BEHIND THE SERVER</div>
+  <h1>Staff Team</h1>
+  <p>Having an issue in-game or on Discord? Reach out to any of the staff below.</p>
+</section>
+
+<div class="page-wrap">
+
+  <div class="placeholder-note">
+    <strong>Note for the server owner:</strong> the names below are placeholders. Tell me the real staff names and ranks and I'll drop them straight in.
+  </div>
+
+  <div class="rank-block">
+    <div class="rank-heading">
+      <span class="rank-swatch" style="background:var(--amber-500);"></span>
+      <h2>Owner</h2>
+    </div>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:var(--amber-500);">Z</div>
+        <div class="staff-name">zak</div>
+        <div class="staff-role">Owner</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rank-block">
+    <div class="rank-heading">
+      <span class="rank-swatch" style="background:#e0524a;"></span>
+      <h2>Admin</h2>
+    </div>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#e0524a;">?</div>
+        <div class="staff-name">Add name</div>
+        <div class="staff-role">Admin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rank-block">
+    <div class="rank-heading">
+      <span class="rank-swatch" style="background:var(--leaf-500);"></span>
+      <h2>Moderator</h2>
+    </div>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:var(--leaf-500);">?</div>
+        <div class="staff-name">Add name</div>
+        <div class="staff-role">Moderator</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:var(--leaf-500);">?</div>
+        <div class="staff-name">Add name</div>
+        <div class="staff-role">Moderator</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rank-block">
+    <div class="rank-heading">
+      <span class="rank-swatch" style="background:#5c8fd6;"></span>
+      <h2>Builder</h2>
+    </div>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#5c8fd6;">?</div>
+        <div class="staff-name">Add name</div>
+        <div class="staff-role">Builder</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Trap Network. Not affiliated with Mojang or Microsoft.</span>
+    <span class="footer-links">
+      <a href="rules.html">Rules</a>
+      <a href="applications.html">Applications</a>
+      <a href="staff.html">Staff</a>
+    </span>
+  </div>
+</footer>
+
+<div class="cookie-banner">
+  <p>This site uses cookies to help personalise content, tailor your experience and to keep you logged in if you register. By continuing to use this site, you are consenting to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="accept">&#10003; Accept</button>
+    <button class="learn-more">Learn more...</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Announcements — Trap Network</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav-group left">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link active" href="announcements.html">ANNOUNCEMENTS</a>
+      <a class="nav-link" href="applications.html">APPLICATIONS</a>
+      <a class="nav-link" href="store.html">STORE</a>
+    </nav>
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Trap Network">
+    </a>
+    <nav class="nav-group right">
+      <a class="nav-link" href="staff.html">STAFF</a>
+      <a class="nav-link" href="rules.html">RULES</a>
+      <a class="nav-link" href="index.html#play">PLAY</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <a href="login.html">LOG IN</a>
+    <a href="register.html">REGISTER</a>
+  </div>
+</div>
+
+<div class="container" style="max-width:900px;">
+  <div class="page-hero" style="text-align:center; padding:40px 0 20px;">
+    <h1 style="font-family:var(--font-display); font-size:2.4rem; margin:0;">ANNOUNCEMENTS</h1>
+    <p style="color:var(--ink-400); margin-top:6px;">Server news, updates and important information.</p>
+  </div>
+
+  <div class="announce-info-banner">
+    This page is a live front-end demo — announcements you create are only visible in your current browser tab and will reset if you reload. To make announcements permanent and visible to every visitor, this needs to be connected to a real database (see the note at the end of my reply).
+  </div>
+
+  <div class="announce-panel">
+    <div class="announce-grid" id="announceGrid"></div>
+    <button class="create-announce-link" id="createAnnounceBtn">+ Create announcement</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Trap Network. Not affiliated with Mojang or Microsoft.</span>
+    <span class="footer-links">
+      <a href="rules.html">Rules</a>
+      <a href="applications.html">Applications</a>
+      <a href="staff.html">Staff</a>
+    </span>
+  </div>
+</footer>
+
+<div class="cookie-banner">
+  <p>This site uses cookies to help personalise content, tailor your experience and to keep you logged in if you register. By continuing to use this site, you are consenting to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="accept">&#10003; Accept</button>
+    <button class="learn-more">Learn more...</button>
+  </div>
+</div>
+
+<!-- Code gate modal -->
+<div class="modal-overlay" id="codeModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close="codeModal">&times;</button>
+    <h3>Staff access</h3>
+    <p class="modal-sub">Enter the staff code to create a new announcement.</p>
+    <div class="field-group">
+      <label for="codeInput">Access code</label>
+      <input type="password" id="codeInput" placeholder="Enter code" autocomplete="off">
+    </div>
+    <div class="modal-error" id="codeError">Incorrect code. Try again.</div>
+    <div class="modal-actions">
+      <button class="btn-secondary" data-close="codeModal">Cancel</button>
+      <button class="btn-primary" id="codeSubmit">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create announcement modal -->
+<div class="modal-overlay" id="createModal">
+  <div class="modal-box wide">
+    <button class="modal-close" data-close="createModal">&times;</button>
+    <h3>New announcement</h3>
+    <p class="modal-sub">This will fill the next open slot (max 6 shown at a time).</p>
+    <form id="announceForm">
+      <div class="field-group">
+        <label for="annTime">Date &amp; time</label>
+        <input type="datetime-local" id="annTime" required>
+      </div>
+      <div class="field-group">
+        <label for="annImage">Announcement image</label>
+        <input type="file" id="annImage" accept="image/*">
+        <img class="file-preview" id="annImagePreview" alt="Preview">
+      </div>
+      <div class="field-group">
+        <label for="annTitle">Title</label>
+        <input type="text" id="annTitle" placeholder="e.g. Survival reset this Friday" required>
+      </div>
+      <div class="field-group">
+        <label for="annDesc">Description</label>
+        <textarea id="annDesc" placeholder="Give the full details..." required></textarea>
+      </div>
+      <div class="field-group">
+        <label for="annSender">Sent by (name)</label>
+        <input type="text" id="annSender" placeholder="e.g. Zak" required>
+      </div>
+      <div class="field-group">
+        <label for="annSenderImg">Sent by (avatar image)</label>
+        <input type="file" id="annSenderImg" accept="image/*">
+        <img class="avatar-preview" id="annSenderPreview" alt="Sender preview">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close="createModal">Cancel</button>
+        <button type="submit" class="btn-primary">Post announcement</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Detail view modal -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-box wide">
+    <button class="modal-close" data-close="detailModal">&times;</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  const STAFF_CODE = "Huyfdsf7Gh8tgG8";
+  const MAX_SLOTS = 6;
+  let announcements = []; // in-memory only for this browser tab/session
+
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => closeModal(btn.dataset.close));
+  });
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+
+  function fileToDataURL(file, callback) {
+    if (!file) return callback(null);
+    const reader = new FileReader();
+    reader.onload = () => callback(reader.result);
+    reader.readAsDataURL(file);
+  }
+
+  function formatTime(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return iso;
+    return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('announceGrid');
+    grid.innerHTML = '';
+    for (let i = 0; i < MAX_SLOTS; i++) {
+      const a = announcements[i];
+      const slot = document.createElement('div');
+      if (a) {
+        slot.className = 'announce-slot filled';
+        slot.innerHTML = `
+          ${a.image ? `<img class="slot-img" src="${a.image}" alt="">` : '<div class="slot-img" style="display:flex;align-items:center;justify-content:center;color:var(--ink-600);font-size:0.75rem;">No image</div>'}
+          <div class="slot-body">
+            <div class="slot-title">${escapeHtml(a.title)}</div>
+            <div class="slot-meta">${formatTime(a.time)}</div>
+          </div>`;
+        slot.addEventListener('click', () => showDetail(i));
+      } else {
+        slot.className = 'announce-slot';
+        slot.innerHTML = '<span class="slot-plus">+</span>No announcement yet';
+      }
+      grid.appendChild(slot);
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function showDetail(index) {
+    const a = announcements[index];
+    if (!a) return;
+    const content = document.getElementById('detailContent');
+    content.innerHTML = `
+      ${a.image ? `<img class="detail-img" src="${a.image}" alt="">` : ''}
+      <div class="detail-title">${escapeHtml(a.title)}</div>
+      <div class="detail-time">${formatTime(a.time)}</div>
+      <div class="detail-desc">${escapeHtml(a.description)}</div>
+      <div class="detail-sender">
+        ${a.senderImage ? `<img src="${a.senderImage}" alt="">` : '<div style="width:36px;height:36px;border-radius:50%;background:var(--navy-600);"></div>'}
+        <span>${escapeHtml(a.sender)}</span>
+      </div>
+    `;
+    openModal('detailModal');
+  }
+
+  // ---- Code gate ----
+  document.getElementById('createAnnounceBtn').addEventListener('click', () => {
+    document.getElementById('codeInput').value = '';
+    document.getElementById('codeError').classList.remove('show');
+    openModal('codeModal');
+  });
+
+  document.getElementById('codeSubmit').addEventListener('click', checkCode);
+  document.getElementById('codeInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkCode();
+  });
+
+  function checkCode() {
+    const val = document.getElementById('codeInput').value;
+    if (val === STAFF_CODE) {
+      closeModal('codeModal');
+      document.getElementById('announceForm').reset();
+      document.getElementById('annImagePreview').classList.remove('show');
+      document.getElementById('annSenderPreview').classList.remove('show');
+      openModal('createModal');
+    } else {
+      document.getElementById('codeError').classList.add('show');
+    }
+  }
+
+  // ---- Image previews ----
+  document.getElementById('annImage').addEventListener('change', function () {
+    fileToDataURL(this.files[0], url => {
+      const img = document.getElementById('annImagePreview');
+      if (url) { img.src = url; img.classList.add('show'); }
+      else { img.classList.remove('show'); }
+    });
+  });
+  document.getElementById('annSenderImg').addEventListener('change', function () {
+    fileToDataURL(this.files[0], url => {
+      const img = document.getElementById('annSenderPreview');
+      if (url) { img.src = url; img.classList.add('show'); }
+      else { img.classList.remove('show'); }
+    });
+  });
+
+  // ---- Submit new announcement ----
+  document.getElementById('announceForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const time = document.getElementById('annTime').value;
+    const title = document.getElementById('annTitle').value.trim();
+    const description = document.getElementById('annDesc').value.trim();
+    const sender = document.getElementById('annSender').value.trim();
+    const imageFile = document.getElementById('annImage').files[0];
+    const senderFile = document.getElementById('annSenderImg').files[0];
+
+    fileToDataURL(imageFile, imageUrl => {
+      fileToDataURL(senderFile, senderUrl => {
+        const entry = { time, title, description, sender, image: imageUrl, senderImage: senderUrl };
+        announcements.unshift(entry);
+        if (announcements.length > MAX_SLOTS) announcements = announcements.slice(0, MAX_SLOTS);
+        renderGrid();
+        closeModal('createModal');
+        showToast('Announcement posted!');
+      });
+    });
+  });
+
+  renderGrid();
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rules — Trap Network</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .rules-section {
+    background: var(--navy-700);
+    border-radius: var(--radius-lg);
+    padding: 32px 34px;
+    margin-bottom: 28px;
+  }
+  .rules-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    letter-spacing: 0.04em;
+    color: var(--amber-500);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rules-section .section-sub {
+    color: var(--ink-400);
+    font-size: 0.88rem;
+    margin: 0 0 20px;
+  }
+  ol.rule-list {
+    counter-reset: rule;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  ol.rule-list li {
+    counter-increment: rule;
+    position: relative;
+    padding: 10px 0 10px 46px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.55;
+  }
+  ol.rule-list li:last-child { border-bottom: none; }
+  ol.rule-list li::before {
+    content: counter(rule);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    background: var(--navy-600);
+    color: var(--amber-500);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .punishment-note {
+    background: rgba(224, 82, 74, 0.12);
+    border: 1px solid rgba(224, 82, 74, 0.35);
+    color: #f2b3af;
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <nav class="nav-group left">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="announcements.html">ANNOUNCEMENTS</a>
+      <a class="nav-link" href="applications.html">APPLICATIONS</a>
+      <a class="nav-link" href="store.html">STORE</a>
+    </nav>
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Trap Network">
+    </a>
+    <nav class="nav-group right">
+      <a class="nav-link" href="staff.html">STAFF</a>
+      <a class="nav-link active" href="rules.html">RULES</a>
+      <a class="nav-link" href="index.html#play">PLAY</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <a href="login.html">LOG IN</a>
+    <a href="register.html">REGISTER</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="eyebrow">READ BEFORE YOU PLAY</div>
+  <h1>Rules</h1>
+  <p>These rules apply across Discord and in-game. Ignorance isn't an excuse — read them all.</p>
+</section>
+
+<div class="page-wrap">
+
+  <div class="rules-section">
+    <h2>1. General Rules</h2>
+    <p class="section-sub">Apply everywhere: Discord, in-game chat, and voice.</p>
+    <ol class="rule-list">
+      <li>Follow the <a href="https://discord.com/terms" target="_blank" rel="noopener" style="color:var(--amber-500);">Discord Terms of Service</a>.</li>
+      <li>Use English for chatting. Greetings in other languages are fine, but keep conversations clear.</li>
+      <li>Stay on topic and use channels as intended. Misuse may lead to warnings or mutes.</li>
+      <li>Don't share personal information (e.g. names, addresses, phone numbers).</li>
+      <li>Don't advertise — most advertisements get blocked anyway.</li>
+      <li>Don't beg for roles, XP, rewards, or free items/services.</li>
+      <li>Be positive and respectful. Avoid negativity or unnecessary criticism.</li>
+      <li>Avoid copying &amp; pasting large amounts of text into the server.</li>
+      <li>Don't impersonate staff, members, or public figures.</li>
+      <li>Do not interfere with staff actions or decisions. All decisions are final. If you disagree with a decision, DM zak.</li>
+      <li>Swearing, racism, hate speech, and abuse are not allowed.</li>
+      <li>Avoid controversial or personal topics like politics, or traumatic experiences.</li>
+      <li>Don't repeat messages, overuse emojis (limit to 5 per message), or spam media, commands or reactions.</li>
+      <li>Do not try to bypass server rules or mutes. Evading a mute or ban will result in a ban. Alternate accounts are not allowed.</li>
+      <li>Don't abuse server features to farm XP or rewards.</li>
+      <li>Report rule violations to moderators instead of handling them yourself.</li>
+      <li>Any NSFW content will result in a ban.</li>
+      <li>Do not surf voice channels (switching channels repeatedly).</li>
+      <li>Avoid loud, annoying noises or screeching.</li>
+      <li>Voice changers are not allowed.</li>
+      <li>Use common sense — even if it isn't listed here, think before you act.</li>
+      <li>Don't say the forbidden number (67).</li>
+    </ol>
+    <div class="punishment-note">
+      Breaking any of these rules may result in punishments ranging from mutes, kicks, bans — or so on. This applies across all of zak's servers.
+    </div>
+  </div>
+
+  <div class="rules-section">
+    <h2>2. MC Rules</h2>
+    <p class="section-sub">You must follow all General Rules above as well as the following.</p>
+    <ol class="rule-list">
+      <li><strong>No cheating or hacking.</strong> The use of hacked clients, X-ray, or any form of cheating is strictly forbidden and will result in a permanent ban. This includes the abuse of bugs or glitches. Unfair advantages are not allowed on our server.</li>
+      <li>Client-side mods that provide no advantages are allowed. If you have a mod and are unsure whether it's allowed, please contact a staff member. Allowed examples: minimaps, waypoints, HUDs. Banned examples: auto-totems, auto-wind-charges, auto-MLG, trajectory predictors.</li>
+      <li><strong>No lag machines.</strong> Any form of a lag machine is forbidden.</li>
+    </ol>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Trap Network. Not affiliated with Mojang or Microsoft.</span>
+    <span class="footer-links">
+      <a href="rules.html">Rules</a>
+      <a href="applications.html">Applications</a>
+      <a href="staff.html">Staff</a>
+    </span>
+  </div>
+</footer>
+
+<div class="cookie-banner">
+  <p>This site uses cookies to help personalise content, tailor your experience and to keep you logged in if you register. By continuing to use this site, you are consenting to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="accept">&#10003; Accept</button>
+    <button class="learn-more">Learn more...</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
